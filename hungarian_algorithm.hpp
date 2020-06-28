@@ -6,16 +6,16 @@
 #include <unordered_set>
 #include <vector>
 
-class HungaryAlgorithm {
+class  HungarianAlgorithm {
  public:
   static std::pair<std::vector<int>, double> solve(const std::vector<std::vector<double>>& A) {
     // step 1
-    auto l = HungaryAlgorithm::trivial_labeling(A);  // labelling
-    auto M = HungaryAlgorithm::match(A, l);
+    auto l =  HungarianAlgorithm::trivial_labeling(A);  // labelling
+    auto M =  HungarianAlgorithm::match(A, l);
     while (true) {
       // step 2
       if (M.size() == 2 * A.size()) break;
-      auto u = HungaryAlgorithm::free_vertices(M, A.size()).front();
+      auto u =  HungarianAlgorithm::free_vertices(M, A.size()).front();
       std::unordered_set<int> S = {u};
       std::unordered_set<int> T = {};
       std::unordered_map<int, std::unordered_set<int>> alternating_tree;
@@ -27,7 +27,7 @@ class HungaryAlgorithm {
       std::unordered_set<int> N;
       while (true) {
         if (N.size() == T.size()) {
-          auto it = HungaryAlgorithm::min_slack(slack);
+          auto it =  HungarianAlgorithm::min_slack(slack);
           double alpha = it.second;
           N.insert(it.first);
           slack.erase(it.first);
@@ -38,11 +38,11 @@ class HungaryAlgorithm {
           }
         }
         // step 4
-        auto y = HungaryAlgorithm::set_difference(N, T).front();
-        auto s = HungaryAlgorithm::neighbor_reverse(A, S, l, y).front();
+        auto y =  HungarianAlgorithm::set_difference(N, T).front();
+        auto s =  HungarianAlgorithm::neighbor_reverse(A, S, l, y).front();
         alternating_tree[s].insert(y);
         if (M.count(y) == 0) {  // y is free
-          auto path = HungaryAlgorithm::find_path(alternating_tree, u, y);
+          auto path =  HungarianAlgorithm::find_path(alternating_tree, u, y);
           for (size_t i = 0; i + 1 < path.size(); i++) {
             if (i % 2 == 0) {
               M[path[i]] = path[i + 1];

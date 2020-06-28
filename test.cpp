@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-#include "hungary_algorithm.hpp"
+#include "hungarian_algorithm.hpp"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
       A[i][j] = (std::rand() % 100) / 100.0;
     }
   }
-  auto [a, c] = HungaryAlgorithm::solve(A);
+  auto [a, c] = HungarianAlgorithm::solve(A);
   cout << "reward = " << c << endl;
   cout << "assignment: ";
   for (auto p : a) cout << p << " ";
